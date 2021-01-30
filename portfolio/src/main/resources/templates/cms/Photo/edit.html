@@ -1,0 +1,81 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/cms/Photo/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">文件名称</label>
+				<div class="layui-input-inline">
+					<input type="text" id="name" name="name"  value="${Photo.name}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">路径</label>
+				<div class="layui-input-inline">
+					<input type="text" id="path" name="path"  value="${Photo.path}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">业务ID</label>
+				<div class="layui-input-inline">
+					<input type="text" id="bizId" name="bizId"  value="${Photo.bizId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">上传人id</label>
+				<div class="layui-input-inline">
+					<input type="text" id="userId" name="userId"  value="${Photo.userId}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createTime" name="createTime"  value="${Photo.createTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">orgId</label>
+				<div class="layui-input-inline">
+					<input type="text" id="orgId" name="orgId"  value="${Photo.orgId}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">bizType</label>
+				<div class="layui-input-inline">
+					<input type="text" id="bizType" name="bizType"  value="${Photo.bizType}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">fileBatchId</label>
+				<div class="layui-input-inline">
+					<input type="text" id="fileBatchId" name="fileBatchId"  value="${Photo.fileBatchId}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <layui:attachment name="attachmentId" batchFileUUID="${Photo.attachmentId!uuid()}" isNew="false" bizId="${Photo.id}" bizType="Photo"/>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="id" value=${Photo.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var PhotoEdit = layui.edit
+    PhotoEdit.init();
+});
+</script>

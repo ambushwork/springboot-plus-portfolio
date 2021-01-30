@@ -1,0 +1,80 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/cms/Photo/"}){ -->
+
+<form class="layui-form layui-form-pane" id="addForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">文件名称</label>
+				<div class="layui-input-inline">
+					<input type="text" name="name" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">路径</label>
+				<div class="layui-input-inline">
+					<input type="text" name="path" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">业务ID</label>
+				<div class="layui-input-inline">
+					<input type="text" name="bizId" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">上传人id</label>
+				<div class="layui-input-inline">
+					<input type="text" name="userId" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="createTime" class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">orgId</label>
+				<div class="layui-input-inline">
+					<input type="text" name="orgId" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">bizType</label>
+				<div class="layui-input-inline">
+					<input type="text" name="bizType" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">fileBatchId</label>
+				<div class="layui-input-inline">
+					<input type="text" name="fileBatchId" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <!-- 业务对象得有一个字段保存附件id，假设是attachmentId  -->
+        <layui:attachment name="attachmentId" batchFileUUID="${uuid()}"  bizType="entity.name" isNew="true"  />
+    </div>
+    <layui:submitButtons id="addButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['add'], function(){
+    var PhotoAdd = layui.add
+    PhotoAdd.init();
+});
+</script>

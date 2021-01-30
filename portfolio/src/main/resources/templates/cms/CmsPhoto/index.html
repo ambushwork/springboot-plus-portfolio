@@ -1,0 +1,22 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/cms/CmsPhoto/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <layui:accessButton function="CmsPhoto.add"  action="add">增加</layui:accessButton>
+    <layui:accessButton function="CmsPhoto.edit"  action="edit">编辑</layui:accessButton>
+    <layui:accessButton function="CmsPhoto.del"  action="del">删除</layui:accessButton>
+     <layui:accessButton function="CmsPhoto.exportDocument"  action="exportDocument">导出</layui:accessButton>
+     <layui:accessButton function="CmsPhoto.importDocument"  action="importDocument">导入</layui:accessButton>
+</div>
+
+<table id="CmsPhotoTable" lay-filter="CmsPhotoTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

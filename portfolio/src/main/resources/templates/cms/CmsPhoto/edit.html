@@ -1,0 +1,59 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/cms/CmsPhoto/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">title</label>
+				<div class="layui-input-inline">
+					<input type="text" id="title" name="title"  value="${CmsPhoto.title}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">content</label>
+				<div class="layui-input-inline">
+					<input type="text" id="content" name="content"  value="${CmsPhoto.content}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">createTime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createTime" name="createTime"  value="${CmsPhoto.createTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">createUserId</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createUserId" name="createUserId"  value="${CmsPhoto.createUserId}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">type</label>
+				<div class="layui-input-inline">
+					<input type="text" id="type" name="type"  value="${CmsPhoto.type}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <layui:attachment name="attachmentId" batchFileUUID="${CmsPhoto.attachmentId!uuid()}" isNew="false" bizId="${CmsPhoto.id}" bizType="CmsPhoto"/>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="id" value=${CmsPhoto.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var CmsPhotoEdit = layui.edit
+    CmsPhotoEdit.init();
+});
+</script>
