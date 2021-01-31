@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.ibeetl.admin.core.dao.CoreFileDao;
 import com.ibeetl.admin.core.entity.CoreFile;
+import com.ibeetl.admin.core.service.QiniuConstants;
 import com.ibeetl.admin.core.util.DateUtil;
 import com.ibeetl.admin.core.util.PlatformException;
 import com.ibeetl.admin.core.util.UUIDUtil;
@@ -63,13 +64,7 @@ public class LocalFileService   implements FileService {
 	    coreFile.setName(name);
 	    coreFile.setCreateTime(new Date());
 	    coreFile.setFileBatchId(fileBatchId);
-	    String dir = DateUtil.now("yyyyMMdd");
-	    File dirFile = new File(root + File.separator + dir);
-	    if(!dirFile.exists()) {
-	        dirFile.mkdirs();
-	    }
-	    String fileName = name+"."+UUIDUtil.uuid();
-	    String path =  dir+File.separator+fileName;
+	    String path =  QiniuConstants.DOMAIN + fileBatchId;
 	    coreFile.setPath(path);
 	    //目前忽略tags
 	    dbHelper.createFileItem(coreFile,tags);

@@ -24,6 +24,7 @@ import com.ibeetl.admin.core.entity.CoreUser;
 import com.ibeetl.admin.core.file.FileItem;
 import com.ibeetl.admin.core.file.FileService;
 import com.ibeetl.admin.core.service.CorePlatformService;
+import com.ibeetl.admin.core.service.IQiniuService;
 import com.ibeetl.admin.core.util.FileUtil;
 
 @Controller
@@ -32,6 +33,9 @@ public class FileSystemContorller {
 	
 	@Autowired
 	CorePlatformService platformService ;
+	
+	@Autowired
+	IQiniuService qiniuService;
 	
 	private static final String MODEL = "/core/file";
 	
@@ -42,12 +46,21 @@ public class FileSystemContorller {
         if(file.isEmpty()) {
             return JsonResult.fail();
         }
+        String respKey = null;
+        try {
+        	log.warn("start update file");
+        	respKey= qiniuService.uploadFile(file.getInputStream(), batchFileUUID);
+		}  catch (Exception e) {
+			log.warn("fail update file");
+			return JsonResult.fail();
+		}
+       
         CoreUser user = platformService.getCurrentUser();
         CoreOrg  org = platformService.getCurrentOrg();
-        FileItem fileItem = fileService.createFileItem(file.getOriginalFilename(), bizType, bizId, user.getId(), org.getId(), batchFileUUID,null);
-        OutputStream os = fileItem.openOutpuStream();
-        FileUtil.copy(file.getInputStream(), os);
-        return JsonResult.success(fileItem);
+        FileItem fileItem = fileService.createFileItem(file.getOriginalFilename(), bizType, bizId, user.getId(), org.getId(), respKey,null);
+		log.warn(respKey);
+		return JsonResult.success(fileItem);
+				
     }
     
     @PostMapping(MODEL + "/deleteAttachment.json")
